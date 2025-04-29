@@ -5,7 +5,9 @@ function App() {
   return (
     <>
       <Header></Header>
-      <FeatureMovies></FeatureMovies>
+      <div className="aspect-video">
+        <FeatureMovies></FeatureMovies>
+      </div>
     </>
   );
 }
