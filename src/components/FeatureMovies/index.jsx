@@ -11,6 +11,7 @@ export default function FeatureMovies() {
     fetch(URL_POPULAR_MOVIES, OPTIONS_GET)
     .then((res) => res.json())
     .then((data) => {
+      console.log(data);
       setMoviesPopular(data.results.slice(16, 20));
     })
     .catch((err) => console.error(err));

@@ -3,7 +3,7 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 export default function Header() {
   return (
-    <header className="fixed left-0 right-0 top-0 z-10 flex h-14 items-center justify-between overflow-hidden bg-slate-950 px-8 text-white">
+    <header className="fixed left-0 right-0 top-0 z-10 flex h-14 items-center justify-between overflow-hidden bg-slate-950 px-8 text-white shadow-xl">
       <div className="flex items-center gap-4">
         <img src="./netflix.png" alt="logo-netflix" className="w-16 sm:w-28" />
         <a href="#">Phim</a>
