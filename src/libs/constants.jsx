@@ -9,6 +9,9 @@ export const OPTIONS_GET = {
   },
 };
 
+export const getUrlDetailsMovie = (id) => `https://api.themoviedb.org/3/movie/${id}`;
+export const getUrlCreditsMovie = (id) => `https://api.themoviedb.org/3/movie/${id}/credits`;
+
 export const TABS_TRENDING = [
   {
     id: 'all',
