@@ -1,4 +1,4 @@
-import CircularProgressBar from "./CircularProgressBar";
+import CircularProgressBar from "../CircularProgressBar";
 
 export default function MovieCard({ poster, title, point, date, mediaType }) {
   return (

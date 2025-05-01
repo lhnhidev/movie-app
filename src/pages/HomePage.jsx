@@ -1,9 +1,9 @@
-import Header from "./components/Header";
-import FeatureMovies from "./components/FeatureMovies";
-import MediaList from "./components/MediaList";
-import { TABS_RATED, TABS_TRENDING } from "./libs/constants";
+import Header from "../components/Header";
+import FeatureMovies from "../components/FeatureMovies";
+import MediaList from "../components/MediaList";
+import { TABS_RATED, TABS_TRENDING } from "../libs/constants";
 
-function App() {
+function HomePage() {
   return (
     <>
       <Header></Header>
@@ -16,4 +16,4 @@ function App() {
   );
 }
 
-export default App;
+export default HomePage;
