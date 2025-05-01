@@ -3,40 +3,35 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CircularProgressBar from "../components/CircularProgressBar";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import {
-  getUrlCreditsMovie,
-  getUrlDetailsMovie,
-  OPTIONS_GET,
-} from "../libs/constants";
+import { getUrlDetailsMovie, OPTIONS_GET } from "../libs/constants";
 
 export default function MovieDetails() {
   const { id } = useParams();
   const [movieInfo, setMovieInfo] = useState({});
-  const [prodution, setProdution] = useState({});
 
   const handleRenderCrews = (type) => {
-    return prodution.crew?.filter((member) => {
-      const { department, original_name, id } = member;
-      if (department === type) return {id, original_name};
-    }).map((member, index, arr) => {
-      if (index === arr.length - 1) {
-        return <span key={member.id}>{member.original_name}</span>
-      }
-      return <span key={member.id}>{member.original_name}, </span>
-    })
-  }
+    return (movieInfo.credits?.crew || [])
+      ?.filter((member) => member.department === type)
+      .map((member) => member.name)
+      .join(", ");
+  };
+
+  const certification = (
+    (movieInfo?.release_dates?.results || []).find(
+      (movie) => movie.iso_3166_1 === "US"
+    )?.release_dates || []
+  ).find((item) => item.certification != "")?.certification || 'G';
 
   useEffect(() => {
     fetch(getUrlDetailsMovie(id), OPTIONS_GET)
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setMovieInfo(data);
-      });
-
-    fetch(getUrlCreditsMovie(id), OPTIONS_GET)
-      .then((response) => response.json())
-      .then((data) => {
-        setProdution(data);
+      })
+      .catch((error) => {
+        alert("Không tìm thấy dữ liệu phim");
+        return new Error(error);
       });
   }, [id]);
 
@@ -45,7 +40,7 @@ export default function MovieDetails() {
       <img
         src={`https://image.tmdb.org/t/p/original${movieInfo.backdrop_path}`}
         alt={`backdrop_${movieInfo.title}`}
-        className="absolute inset-0 brightness-[.2]"
+        className="absolute inset-0 brightness-[.2] w-full"
       ></img>
 
       <div className="relative mx-auto flex max-w-5xl gap-6 px-5 py-8">
@@ -61,15 +56,10 @@ export default function MovieDetails() {
             {movieInfo.title}
           </p>
           <div className="flex items-center gap-5 text-[12px]">
-            <span className="border border-gray-400 p-1">G</span>
+            <span className="border border-gray-400 p-1">{certification}</span>
             <p>{movieInfo.release_date}</p>
             <p>
-              {movieInfo.genres?.map((item, index) => {
-                if (index === movieInfo.genres.length - 1) {
-                  return <span key={item.id}>{item.name}</span>;
-                }
-                return <span key={item.id}>{item.name}, </span>;
-              })}
+              {(movieInfo.genres || [])?.map((item) => item.name).join(", ")}
             </p>
           </div>
 

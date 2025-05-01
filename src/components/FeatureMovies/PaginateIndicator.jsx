@@ -7,7 +7,6 @@ export default function PaginateIndicator({
     <div className="absolute bottom-[30px] right-8 lg:bottom-[15%] xl:bottom-[25%]">
       <ul className="hidden gap-1 min-[480px]:flex">
         {movies.map((movie) => {
-          // console.log(movie);
           return (
             <li
               className={`h-1 w-6 cursor-pointer ${activeMovieId === movie.id ? "bg-stone-50" : "bg-gray-500"}`}
