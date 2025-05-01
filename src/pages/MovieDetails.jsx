@@ -16,11 +16,12 @@ export default function MovieDetails() {
       .join(", ");
   };
 
-  const certification = (
-    (movieInfo?.release_dates?.results || []).find(
-      (movie) => movie.iso_3166_1 === "US"
-    )?.release_dates || []
-  ).find((item) => item.certification != "")?.certification || 'G';
+  const certification =
+    (
+      (movieInfo?.release_dates?.results || []).find(
+        (movie) => movie.iso_3166_1 === "US",
+      )?.release_dates || []
+    ).find((item) => item.certification != "")?.certification || "G";
 
   useEffect(() => {
     fetch(getUrlDetailsMovie(id), OPTIONS_GET)
@@ -36,11 +37,11 @@ export default function MovieDetails() {
   }, [id]);
 
   return (
-    <div className="relative overflow-hidden text-white">
+    <div className="relative mt-14 overflow-hidden text-white lg:mt-20">
       <img
         src={`https://image.tmdb.org/t/p/original${movieInfo.backdrop_path}`}
         alt={`backdrop_${movieInfo.title}`}
-        className="absolute inset-0 brightness-[.2] w-full"
+        className="absolute inset-0 w-full brightness-[.2]"
       ></img>
 
       <div className="relative mx-auto flex max-w-5xl gap-6 px-5 py-8">

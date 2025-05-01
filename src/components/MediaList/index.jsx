@@ -45,6 +45,7 @@ export default function MediaList({ title, tabs }) {
         {mediaList.map((movie) => {
           return (
             <MovieCard
+              id={movie?.id}
               key={movie?.id}
               poster={movie?.poster_path}
               title={movie?.title || movie?.name}
