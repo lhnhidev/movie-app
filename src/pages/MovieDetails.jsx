@@ -4,10 +4,12 @@ import CircularProgressBar from "../components/CircularProgressBar";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getUrlDetailsMovie, OPTIONS_GET } from "../libs/constants";
+import Loading from "../components/Loading";
 
 export default function MovieDetails() {
   const { id } = useParams();
   const [movieInfo, setMovieInfo] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleRenderCrews = (type) => {
     return (movieInfo.credits?.crew || [])
@@ -24,17 +26,20 @@ export default function MovieDetails() {
     ).find((item) => item.certification != "")?.certification || "G";
 
   useEffect(() => {
+    setIsLoading(true);
     fetch(getUrlDetailsMovie(id), OPTIONS_GET)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setMovieInfo(data);
       })
       .catch((error) => {
-        alert("Không tìm thấy dữ liệu phim");
+        // alert("Không tìm thấy dữ liệu phim");
         return new Error(error);
-      });
+      })
+      .finally(() => setIsLoading(false));
   }, [id]);
+
+  if (isLoading) return <Loading text="Loading..."></Loading>;
 
   return (
     <div className="relative mt-14 overflow-hidden text-white lg:mt-20">
