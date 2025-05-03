@@ -18,7 +18,7 @@ export default function Banner({ mediaInfo }) {
     ).find((item) => item.certification != "")?.certification || "G";
 
   return (
-    <div className="relative mt-14 overflow-hidden text-white lg:mt-20">
+    <div className="relative mt-14 overflow-hidden text-white lg:mt-20 shadow-sm shadow-slate-800">
       <img
         src={`https://image.tmdb.org/t/p/original${mediaInfo.backdrop_path}`}
         alt={`backdrop_${mediaInfo.title}`}

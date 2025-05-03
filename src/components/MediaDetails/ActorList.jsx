@@ -1,14 +1,16 @@
 import { useState } from "react";
 import ActorInfo from "./ActorInfo";
+import RelatedMediaList from "@components/MediaDetails/RelatedMediaList";
+import MovieInfomation from "./MovieInfomation";
 
-export default function ActorList({ actors }) {
+export default function ActorList({ movieInfo, actors, id }) {
   const [isShowMore, setIsShowMore] = useState(true);
 
   const arrayActors = isShowMore ? (actors || []).slice(0, 4) : actors;
 
   return (
     <div className="bg-slate-950 px-8 py-5 text-white">
-      <div className="flex gap-6 mx-auto max-w-5xl">
+      <div className="mx-auto flex max-w-5xl gap-6">
         <div className="flex-[2]">
           <p className="mb-3 text-[18px] font-bold">Actor</p>
           <div className="grid grid-cols-3 gap-3 sm:grid-cols-4">
@@ -22,13 +24,19 @@ export default function ActorList({ actors }) {
             ))}
           </div>
 
-          <p className="mt-4 inline-block cursor-pointer px-2 py-1" onClick={() => setIsShowMore(!isShowMore)}>
-            {isShowMore ? 'Show More' : 'Show Less'}
+          <p
+            className="mt-4 inline-block cursor-pointer px-2 py-1"
+            onClick={() => setIsShowMore(!isShowMore)}
+          >
+            {isShowMore ? "Show More" : "Show Less"}
           </p>
+
+          <div className="mt-6">
+            <RelatedMediaList id={id}></RelatedMediaList>
+          </div>
         </div>
         <div className="flex-1">
-          <p className="mb-3 text-[18px] font-bold">Information</p>
-          <div></div>
+          <MovieInfomation movieInfo={movieInfo || {}}></MovieInfomation>
         </div>
       </div>
     </div>

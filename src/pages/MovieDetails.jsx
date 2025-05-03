@@ -1,9 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getUrlDetailsMovie, OPTIONS_GET } from "../libs/constants";
-import Loading from "../components/Loading";
-import Banner from "../components/MediaDetails/Banner";
-import ActorList from "../components/MediaDetails/ActorList";
+import Loading from "@components/Loading";
+import Banner from "@components/MediaDetails/Banner";
+import ActorList from "@components/MediaDetails/ActorList";
+import { getUrlDetailsMovie } from "@libs/utils";
+import { OPTIONS_GET } from "@libs/constants";
 
 export default function MovieDetails() {
   const { id } = useParams();
@@ -15,7 +16,6 @@ export default function MovieDetails() {
     fetch(getUrlDetailsMovie(id), OPTIONS_GET)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setMovieInfo(data);
       })
       .catch((error) => {
@@ -29,7 +29,7 @@ export default function MovieDetails() {
   return (
     <>
       <Banner mediaInfo={movieInfo}></Banner>
-      <ActorList actors={movieInfo?.credits?.cast || []}></ActorList>
+      <ActorList movieInfo={movieInfo} actors={movieInfo?.credits?.cast || []} id={id}></ActorList>
     </>
   );
 }

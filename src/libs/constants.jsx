@@ -9,8 +9,6 @@ export const OPTIONS_GET = {
   },
 };
 
-export const getUrlDetailsMovie = (id) => `https://api.themoviedb.org/3/movie/${id}?append_to_response=release_dates,credits`;
-
 export const TABS_TRENDING = [
   {
     id: 'all',

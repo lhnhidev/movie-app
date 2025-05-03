@@ -1,6 +1,6 @@
+import MovieCard from "@components/MovieCard";
+import { OPTIONS_GET } from "@libs/constants";
 import { useEffect, useState } from "react";
-import MovieCard from "./MovieCard";
-import { OPTIONS_GET } from "../../libs/constants";
 
 export default function MediaList({ title, tabs }) {
   const [mediaList, setMediaList] = useState([]);
