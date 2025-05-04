@@ -1,6 +1,7 @@
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CircularProgressBar from "../CircularProgressBar.jsx";
+import ImageComponent from "@components/ImageComponent.jsx";
 
 export default function Banner({ mediaInfo }) {
   const handleRenderCrews = (type) => {
@@ -18,19 +19,20 @@ export default function Banner({ mediaInfo }) {
     ).find((item) => item.certification != "")?.certification || "G";
 
   return (
-    <div className="relative mt-14 overflow-hidden text-white lg:mt-20 shadow-sm shadow-slate-800">
-      <img
+    <div className="relative mt-14 overflow-hidden text-white shadow-sm shadow-slate-800 lg:mt-20">
+      <ImageComponent
         src={`https://image.tmdb.org/t/p/original${mediaInfo.backdrop_path}`}
         alt={`backdrop_${mediaInfo.title}`}
         className="absolute inset-0 w-full brightness-[.2]"
-      ></img>
+        aspect=""
+      ></ImageComponent>
 
       <div className="relative mx-auto flex max-w-5xl gap-6 px-5 py-8">
         <div className="flex-1">
-          <img
+          <ImageComponent
             src={`https://image.tmdb.org/t/p/original${mediaInfo.poster_path}`}
             alt={`img_${mediaInfo.title}`}
-          ></img>
+          ></ImageComponent>
         </div>
 
         <div className="flex-[2]">

@@ -1,7 +1,15 @@
 import { Link } from "react-router-dom";
 import CircularProgressBar from "./CircularProgressBar";
+import ImageComponent from "./ImageComponent";
 
-export default function MovieCard({ id, poster, title, point, date, mediaType }) {
+export default function MovieCard({
+  id,
+  poster,
+  title,
+  point,
+  date,
+  mediaType,
+}) {
   return (
     <Link to={`/movie/${id}`} className="rounded-lg border border-slate-800">
       <div className="relative">
@@ -10,11 +18,11 @@ export default function MovieCard({ id, poster, title, point, date, mediaType })
             Tv show
           </p>
         )}
-        <img
-          className="rounded-t-lg min-h-[234px]"
+        <ImageComponent
           src={`https://image.tmdb.org/t/p/original${poster}`}
           alt={`poster_${title}`}
-        ></img>
+          className="rounded-t-lg w-full"
+        ></ImageComponent>
         <div className="relative top-[-20px] px-3 min-[768px]:px-6">
           <div className="mb-4">
             <CircularProgressBar

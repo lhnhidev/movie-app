@@ -1,3 +1,4 @@
+import ImageComponent from "@components/ImageComponent";
 import { formatCurrency } from "@libs/utils";
 
 export default function MovieInfomation({ movieInfo }) {
@@ -20,6 +21,12 @@ export default function MovieInfomation({ movieInfo }) {
                 alt={`flag_${code}`}
                 className="mr-1"
               ></img>
+              // <ImageComponent
+              //   key={code}
+              //   src={`https://flagcdn.com/24x18/${code.toLowerCase()}.png`}
+              //   alt={`flag_${code}`}
+              //   className="mr-1"
+              // ></ImageComponent>
             ))}
           </div>
         </div>
