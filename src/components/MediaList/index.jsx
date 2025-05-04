@@ -1,22 +1,16 @@
 import MovieCard from "@components/MovieCard";
-import { OPTIONS_GET } from "@libs/constants";
-import { useEffect, useState } from "react";
+import useFetch from "@hooks/useFetch";
+import { useMemo, useState } from "react";
 
 export default function MediaList({ title, tabs }) {
-  const [mediaList, setMediaList] = useState([]);
   const [activeTabId, setActiveTabId] = useState(tabs[0].id);
 
-  useEffect(() => {
-    const url = tabs.find((tab) => tab.id === activeTabId)?.url;
-    if (url != undefined) {
-      fetch(url, OPTIONS_GET)
-        .then((res) => res.json())
-        .then((json) => {
-          setMediaList(json.results);
-        })
-        .catch((err) => console.error(err));
-    }
-  }, [activeTabId, tabs]);
+  const url = useMemo(
+    () => tabs.find((tab) => tab.id === activeTabId)?.url,
+    [tabs, activeTabId],
+  );
+  const { data } = useFetch({ url });
+  const mediaList = useMemo(() => data?.results || [], [data]);
 
   return (
     <div className="bg-slate-950 px-8 py-8 text-white">

@@ -1,18 +1,10 @@
 import MovieCard from "@components/MovieCard";
-import { OPTIONS_GET } from "@libs/constants";
-import { getUrlRelatedMovie } from "@libs/utils";
-import { useEffect, useState } from "react";
+import useFetch from "@hooks/useFetch";
+import { useMemo } from "react";
 
 export default function RelatedMediaList({ id }) {
-  const [relatedMediaList, setRelatedMediaList] = useState([]);
-
-  useEffect(() => {
-    fetch(getUrlRelatedMovie(id), OPTIONS_GET)
-      .then((response) => response.json())
-      .then((data) => {
-        setRelatedMediaList(data.results);
-      });
-  }, [id]);
+  const { data } = useFetch({ url: `movie/${id}/recommendations` });
+  const relatedMediaList = useMemo(() => data?.results || [], [data]);
 
   return (
     <>

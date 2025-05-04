@@ -1,20 +1,17 @@
-import { useEffect, useState } from "react";
-import { OPTIONS_GET, URL_POPULAR_MOVIES } from "../../libs/constants";
+import { useEffect, useMemo, useState } from "react";
 import Movie from "./Movie";
 import PaginateIndicator from "./PaginateIndicator";
+import useFetch from "@hooks/useFetch";
 
 export default function FeatureMovies() {
-  const [moviesPopular, setMoviesPopular] = useState([]);
   const [activeMovieId, setActiveMovieId] = useState();
 
-  useEffect(() => {
-    fetch(URL_POPULAR_MOVIES, OPTIONS_GET)
-      .then((res) => res.json())
-      .then((data) => {
-        setMoviesPopular(data.results.slice(16, 20));
-      })
-      .catch((err) => console.error(err));
-  }, []);
+  const { data } = useFetch({ url: "movie/popular" });
+
+  const moviesPopular = useMemo(
+    () => data?.results?.slice(16, 20) || [],
+    [data],
+  );
 
   useEffect(() => {
     setActiveMovieId(moviesPopular[0]?.id);
@@ -22,10 +19,12 @@ export default function FeatureMovies() {
 
   useEffect(() => {
     let index = 1;
-    setInterval(() => {
+    const interval = setInterval(() => {
       if (index >= moviesPopular.length) index = 0;
       setActiveMovieId(moviesPopular[index++]?.id);
     }, 5000);
+
+    return () => clearInterval(interval);
   }, [moviesPopular]);
 
   return (

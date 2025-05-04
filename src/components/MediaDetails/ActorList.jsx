@@ -17,7 +17,7 @@ export default function ActorList({ movieInfo, actors, id }) {
             {(arrayActors || []).map((actor) => (
               <ActorInfo
                 key={actor.id}
-                name={actor.original_name}
+                name={actor.name}
                 profilePath={actor.profile_path}
                 character={actor.character}
               ></ActorInfo>

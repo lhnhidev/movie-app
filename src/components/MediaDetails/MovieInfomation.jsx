@@ -5,7 +5,6 @@ export default function MovieInfomation({ movieInfo }) {
     <>
       <p className="mb-3 text-[18px] font-bold">Information</p>
       <div>
-        {console.log(movieInfo)}
         <div className="mb-3 font-medium">
           <p className="mb-1">Original Name</p>
           <p>{movieInfo.original_title}</p>
