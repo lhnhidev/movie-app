@@ -1,6 +1,6 @@
 import { useState } from "react";
-import ActorInfo from "./ActorInfo";
 import RelatedMediaList from "@components/MediaDetails/RelatedMediaList";
+import ActorInfo from "./ActorInfo";
 import MovieInfomation from "./MovieInfomation";
 
 export default function ActorList({ movieInfo, actors, id, type }) {
