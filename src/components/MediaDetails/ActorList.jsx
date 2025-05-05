@@ -25,7 +25,7 @@ export default function ActorList({ movieInfo, actors, id, type }) {
                   actor.character ||
                   (actor.roles || []).map((item) => item.character).join("/")
                 }
-                episode={actor.roles[0]?.episode_count || 0}
+                episode={actor?.roles && actor?.roles[0]?.episode_count}
               ></ActorInfo>
             ))}
           </div>
