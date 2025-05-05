@@ -11,15 +11,33 @@ export default function MovieDetails() {
     url: `movie/${id}?append_to_response=release_dates,credits`,
   });
 
+  const certification =
+    (
+      (movieInfo?.release_dates?.results || []).find(
+        (movie) => movie.iso_3166_1 === "US",
+      )?.release_dates || []
+    ).find((item) => item.certification != "")?.certification || "G";
+
   if (isLoading) return <Loading text="Loading..."></Loading>;
 
   return (
     <>
-      <Banner mediaInfo={movieInfo}></Banner>
+      <Banner
+        backdrop_path={movieInfo?.backdrop_path}
+        title={movieInfo?.title}
+        poster_path={movieInfo?.poster_path}
+        release_date={movieInfo?.release_date}
+        genres={movieInfo?.genres}
+        vote_average={movieInfo?.vote_average}
+        overview={movieInfo?.overview}
+        certification={certification}
+        crew={movieInfo.credits?.crew}
+      ></Banner>
       <ActorList
         movieInfo={movieInfo}
         actors={movieInfo?.credits?.cast || []}
         id={id}
+        type="movie"
       ></ActorList>
     </>
   );

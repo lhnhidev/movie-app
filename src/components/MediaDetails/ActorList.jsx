@@ -3,7 +3,7 @@ import ActorInfo from "./ActorInfo";
 import RelatedMediaList from "@components/MediaDetails/RelatedMediaList";
 import MovieInfomation from "./MovieInfomation";
 
-export default function ActorList({ movieInfo, actors, id }) {
+export default function ActorList({ movieInfo, actors, id, type }) {
   const [isShowMore, setIsShowMore] = useState(true);
 
   const arrayActors = isShowMore ? (actors || []).slice(0, 4) : actors;
@@ -16,10 +16,16 @@ export default function ActorList({ movieInfo, actors, id }) {
           <div className="grid grid-cols-3 gap-3 sm:grid-cols-4">
             {(arrayActors || []).map((actor) => (
               <ActorInfo
+                test={console.log(actor)}
                 key={actor.id}
+                id={actor.id}
                 name={actor.name}
                 profilePath={actor.profile_path}
-                character={actor.character}
+                character={
+                  actor.character ||
+                  (actor.roles || []).map((item) => item.character).join("/")
+                }
+                episode={actor.roles[0]?.episode_count || 0}
               ></ActorInfo>
             ))}
           </div>
@@ -32,7 +38,7 @@ export default function ActorList({ movieInfo, actors, id }) {
           </p>
 
           <div className="mt-6">
-            <RelatedMediaList id={id}></RelatedMediaList>
+            <RelatedMediaList id={id} type={type}></RelatedMediaList>
           </div>
         </div>
         <div className="flex-1">

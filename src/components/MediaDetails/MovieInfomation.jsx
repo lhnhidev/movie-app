@@ -14,19 +14,13 @@ export default function MovieInfomation({ movieInfo }) {
         <div className="mb-3 font-medium">
           <p className="mb-1">Original Country</p>
           <div className="flex flex-wrap">  
-            {(movieInfo.origin_country || []).map((code) => (
+            {(movieInfo.production_countries || []).map((code) => (
               <img
-                key={code}
-                src={`https://flagcdn.com/24x18/${code.toLowerCase()}.png`}
-                alt={`flag_${code}`}
+                key={code.iso_3166_1}
+                src={`https://flagcdn.com/24x18/${code.iso_3166_1.toLowerCase()}.png`}
+                alt={`flag_${code.iso_3166_1}`}
                 className="mr-1"
               ></img>
-              // <ImageComponent
-              //   key={code}
-              //   src={`https://flagcdn.com/24x18/${code.toLowerCase()}.png`}
-              //   alt={`flag_${code}`}
-              //   className="mr-1"
-              // ></ImageComponent>
             ))}
           </div>
         </div>

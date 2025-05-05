@@ -1,28 +1,32 @@
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import CircularProgressBar from "../CircularProgressBar.jsx";
 import ImageComponent from "@components/ImageComponent.jsx";
+import CircularProgressBar from "@components/CircularProgressBar";
 
-export default function Banner({ mediaInfo }) {
+export default function Banner({
+  backdrop_path,
+  title,
+  poster_path,
+  release_date,
+  genres,
+  vote_average,
+  overview,
+  certification,
+  crew,
+}) {
+  
   const handleRenderCrews = (type) => {
-    return (mediaInfo.credits?.crew || [])
+    return (crew || [])
       ?.filter((member) => member.department === type)
       .map((member) => member.name)
       .join(", ");
   };
 
-  const certification =
-    (
-      (mediaInfo?.release_dates?.results || []).find(
-        (movie) => movie.iso_3166_1 === "US",
-      )?.release_dates || []
-    ).find((item) => item.certification != "")?.certification || "G";
-
   return (
     <div className="relative mt-14 overflow-hidden text-white shadow-sm shadow-slate-800 lg:mt-20">
       <ImageComponent
-        src={`https://image.tmdb.org/t/p/original${mediaInfo.backdrop_path}`}
-        alt={`backdrop_${mediaInfo.title}`}
+        src={`https://image.tmdb.org/t/p/original${backdrop_path}`}
+        alt={`backdrop_${title}`}
         className="absolute inset-0 w-full brightness-[.2]"
         aspect=""
       ></ImageComponent>
@@ -30,37 +34,33 @@ export default function Banner({ mediaInfo }) {
       <div className="relative mx-auto flex max-w-5xl gap-6 px-5 py-8">
         <div className="flex-1">
           <ImageComponent
-            src={`https://image.tmdb.org/t/p/original${mediaInfo.poster_path}`}
-            alt={`img_${mediaInfo.title}`}
+            src={`https://image.tmdb.org/t/p/original${poster_path}`}
+            alt={`img_${title}`}
           ></ImageComponent>
         </div>
 
         <div className="flex-[2]">
           <p className="mb-2 text-base font-bold min-[480px]:text-lg md:text-xl lg:text-2xl">
-            {mediaInfo.title}
+            {title}
           </p>
           <div className="flex items-center gap-5 text-[12px]">
             <span className="border border-gray-400 p-1">{certification}</span>
-            <p>{mediaInfo.release_date}</p>
-            <p>
-              {(mediaInfo.genres || [])?.map((item) => item.name).join(", ")}
-            </p>
+            <p>{release_date}</p>
+            <p>{(genres || [])?.map((item) => item.name).join(", ")}</p>
           </div>
 
           <div className="mt-3 flex gap-6">
             <div className="flex items-center gap-1">
               <CircularProgressBar
                 percent={
-                  mediaInfo.vote_average?.toFixed(1)
-                    ? mediaInfo.vote_average?.toFixed(1) * 10
-                    : ""
+                  vote_average?.toFixed(1) ? vote_average?.toFixed(1) * 10 : ""
                 }
                 size={35}
                 strokeWidth={3}
                 strokeColor={
-                  mediaInfo.vote_average >= 7
+                  vote_average >= 7
                     ? "green"
-                    : mediaInfo.vote_average >= 5
+                    : vote_average >= 5
                       ? "orange"
                       : "red"
                 }
@@ -77,7 +77,7 @@ export default function Banner({ mediaInfo }) {
             <p className="mb-2 text-base font-bold min-[480px]:text-lg md:text-xl lg:text-2xl">
               Overview
             </p>
-            <p className="text-[12px] sm:text-base">{mediaInfo.overview}</p>
+            <p className="text-[12px] sm:text-base">{overview}</p>
           </div>
 
           <div className="mt-6 flex gap-8">

@@ -11,7 +11,7 @@ export default function MovieCard({
   mediaType,
 }) {
   return (
-    <Link to={`/movie/${id}`} className="rounded-lg border border-slate-800">
+    <Link to={mediaType === "tv" ? `/tv/${id}` : `/movie/${id}`} className="rounded-lg border border-slate-800">
       <div className="relative">
         {mediaType === "tv" && (
           <p className="absolute right-2 top-2 rounded bg-slate-800/80 p-1 text-lg text-white shadow-sm">
