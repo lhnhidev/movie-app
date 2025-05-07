@@ -30,9 +30,6 @@ export default function ActorList({ movieInfo, actors, id, type }) {
               ></ActorInfo>
             ))}
           </div>
-
-          <SeasonList seasons={movieInfo.seasons}></SeasonList>
-
           <p
             className="mt-4 inline-block cursor-pointer px-2 py-1"
             onClick={() => setIsShowMore(!isShowMore)}
@@ -40,6 +37,8 @@ export default function ActorList({ movieInfo, actors, id, type }) {
             {isShowMore ? "Show More" : "Show Less"}
           </p>
 
+          <SeasonList allSeasons={movieInfo.seasons}></SeasonList>
+          
           <div className="mt-6">
             <RelatedMediaList id={id} type={type}></RelatedMediaList>
           </div>

@@ -1,8 +1,16 @@
 import CircularProgressBar from "@components/CircularProgressBar";
 import ImageComponent from "@components/ImageComponent";
+import { useState } from "react";
 
-export default function SeasonList({ seasons = [] }) {
-  console.log(seasons);
+export default function SeasonList({ allSeasons = [] }) {
+  const [isShowMore, setIsShowMore] = useState(
+    allSeasons.length > 3 ? "true" : undefined,
+  );
+
+  const seasons = isShowMore
+    ? allSeasons.reverse().slice(0, 3)
+    : allSeasons.reverse();
+
   return (
     <div>
       <p className="mb-3 mt-4 text-[18px] font-bold">Season</p>
@@ -11,7 +19,7 @@ export default function SeasonList({ seasons = [] }) {
           {seasons.map((season) => (
             <div
               key={season.id}
-              className="rounded-md border border-gray-400 p-3 flex mb-4"
+              className="mb-4 flex rounded-md border border-gray-400 p-3"
             >
               <div className="w-[calc(200px)]">
                 <ImageComponent
@@ -20,15 +28,21 @@ export default function SeasonList({ seasons = [] }) {
                   className={"rounded-lg"}
                 ></ImageComponent>
               </div>
-              <div className="space-y-2 flex-1 ml-4">
+              <div className="ml-4 flex-1 space-y-2">
                 <p className="text-[18px] font-bold">Season {season.name}</p>
                 <div className="flex items-center gap-3">
                   <p>Rating</p>
                   <CircularProgressBar
-                    percent={(season?.vote_average.toFixed(1) * 10) || 0}
+                    percent={season?.vote_average.toFixed(1) * 10 || 0}
                     size={35}
                     strokeWidth={3}
-                    strokeColor={season?.vote_average >= 7 ? "green" : season?.vote_average >= 5 ? "orange" : "red"}
+                    strokeColor={
+                      season?.vote_average >= 7
+                        ? "green"
+                        : season?.vote_average >= 5
+                          ? "orange"
+                          : "red"
+                    }
                   ></CircularProgressBar>
                 </div>
 
@@ -41,6 +55,18 @@ export default function SeasonList({ seasons = [] }) {
               </div>
             </div>
           ))}
+        </div>
+        <div>
+          {isShowMore === undefined ? (
+            ""
+          ) : (
+            <p
+              className="inline-block cursor-pointer px-2 py-1"
+              onClick={() => setIsShowMore(!isShowMore)}
+            >
+              {isShowMore ? "Show More" : "Show Less"}
+            </p>
+          )}
         </div>
       </div>
     </div>
