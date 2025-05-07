@@ -1,7 +1,9 @@
 import { useState } from "react";
 import RelatedMediaList from "@components/MediaDetails/RelatedMediaList";
 import ActorInfo from "./ActorInfo";
-import MovieInfomation from "./MovieInfomation";
+import MovieInformation from "./MovieInformation";
+import TvShowInformation from "./TvShowInformation";
+import SeasonList from "./SeasonList";
 
 export default function ActorList({ movieInfo, actors, id, type }) {
   const [isShowMore, setIsShowMore] = useState(true);
@@ -16,7 +18,6 @@ export default function ActorList({ movieInfo, actors, id, type }) {
           <div className="grid grid-cols-3 gap-3 sm:grid-cols-4">
             {(arrayActors || []).map((actor) => (
               <ActorInfo
-                test={console.log(actor)}
                 key={actor.id}
                 id={actor.id}
                 name={actor.name}
@@ -30,6 +31,8 @@ export default function ActorList({ movieInfo, actors, id, type }) {
             ))}
           </div>
 
+          <SeasonList seasons={movieInfo.seasons}></SeasonList>
+
           <p
             className="mt-4 inline-block cursor-pointer px-2 py-1"
             onClick={() => setIsShowMore(!isShowMore)}
@@ -42,7 +45,22 @@ export default function ActorList({ movieInfo, actors, id, type }) {
           </div>
         </div>
         <div className="flex-1">
-          <MovieInfomation movieInfo={movieInfo || {}}></MovieInfomation>
+          {type === "movie" ? (
+            <MovieInformation
+              original_title={movieInfo?.original_title}
+              production_countries={movieInfo?.production_countries}
+              status={movieInfo?.status}
+              budget={movieInfo?.budget}
+              revenue={movieInfo?.revenue}
+            ></MovieInformation>
+          ) : (
+            <TvShowInformation
+              original_title={movieInfo?.original_name}
+              production_countries={movieInfo?.production_countries}
+              status={movieInfo?.status}
+              networks={movieInfo?.networks || []}
+            ></TvShowInformation>
+          )}
         </div>
       </div>
     </div>

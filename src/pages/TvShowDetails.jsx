@@ -11,8 +11,6 @@ export default function TvShowDetails() {
     url: `tv/${id}?append_to_response=content_ratings,aggregate_credits`,
   });
 
-  console.log(tvShowInfo);
-
   const certification =
     (tvShowInfo?.content_ratings?.results || []).find(
       (show) => show?.iso_3166_1 === "US",

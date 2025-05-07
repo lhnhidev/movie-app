@@ -14,7 +14,6 @@ export default function Banner({
   certification,
   crew,
 }) {
-  
   const handleRenderCrews = (type) => {
     return (crew || [])
       ?.filter((member) => member.department === type)
@@ -23,7 +22,7 @@ export default function Banner({
   };
 
   return (
-    <div className="relative mt-14 overflow-hidden text-white shadow-sm shadow-slate-800 lg:mt-20">
+    <div className="relative mt-14 overflow-hidden bg-slate-950 text-white shadow-sm shadow-slate-800 lg:mt-20">
       <ImageComponent
         src={`https://image.tmdb.org/t/p/original${backdrop_path}`}
         alt={`backdrop_${title}`}
