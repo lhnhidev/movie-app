@@ -13,23 +13,24 @@ export default function ImageComponent({
 
   useEffect(() => {
     const newImg = new Image();
-    newImg.src = src;
-    newImg.onload = () => {
-      setCurrentSource(newImg.src)
-      setIsLoading(false);
-    };
+    if (!src.includes("null")) {
+      newImg.src = src;
+      newImg.onload = () => {
+        setCurrentSource(newImg.src);
+        setIsLoading(false);
+      };
+      return;
+    }
+    setCurrentSource("/actor_no_image.svg");
+    setIsLoading(false);
 
-    return () => newImg.onload = null;
+    return () => (newImg.onload = null);
   }, [src]);
 
   return (
     <div className={aspect ? `aspect-[${aspect}] w-full` : "w-full"}>
       <img
-        className={`
-          transition-opacity duration-700 ease-in-out 
-          ${className} 
-          ${isLoading ? "opacity-30 blur-md" : "opacity-100"}
-        `}
+        className={`transition-opacity duration-700 ease-in-out ${className} ${isLoading ? "opacity-30 blur-md" : "opacity-100"} `}
         src={currentSource}
         alt={alt}
         width={width ?? ""}

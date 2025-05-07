@@ -2,6 +2,9 @@ import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ImageComponent from "@components/ImageComponent.jsx";
 import CircularProgressBar from "@components/CircularProgressBar";
+import { useContext } from "react";
+import ModalProvider from "@context/ModalProvider";
+import { ModalContext } from "@context/ModalContext";
 
 export default function Banner({
   backdrop_path,
@@ -20,6 +23,8 @@ export default function Banner({
       .map((member) => member.name)
       .join(", ");
   };
+
+  const {setIsShowing} = useContext(ModalContext);
 
   return (
     <div className="relative mt-14 overflow-hidden bg-slate-950 text-white shadow-sm shadow-slate-800 lg:mt-20">
@@ -66,7 +71,10 @@ export default function Banner({
               ></CircularProgressBar>
               Rating
             </div>
-            <button className="flex items-center gap-1">
+            <button
+              className="flex items-center gap-1"
+              onClick={() => setIsShowing(true)}
+            >
               <FontAwesomeIcon icon={faPlay}></FontAwesomeIcon>
               Trailer
             </button>

@@ -37,8 +37,9 @@ export default function ActorList({ movieInfo, actors, id, type }) {
             {isShowMore ? "Show More" : "Show Less"}
           </p>
 
-          <SeasonList allSeasons={movieInfo.seasons}></SeasonList>
+          {type === "tv" ? <SeasonList allSeasons={movieInfo.seasons}></SeasonList> : ""}
           
+
           <div className="mt-6">
             <RelatedMediaList id={id} type={type}></RelatedMediaList>
           </div>
