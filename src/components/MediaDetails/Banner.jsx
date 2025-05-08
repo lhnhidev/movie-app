@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ImageComponent from "@components/ImageComponent.jsx";
 import CircularProgressBar from "@components/CircularProgressBar";
 import { useContext } from "react";
-import ModalProvider from "@context/ModalProvider";
 import { ModalContext } from "@context/ModalContext";
 
 export default function Banner({
@@ -16,6 +15,7 @@ export default function Banner({
   overview,
   certification,
   crew,
+  trailerVideoKey,
 }) {
   const handleRenderCrews = (type) => {
     return (crew || [])
@@ -24,7 +24,7 @@ export default function Banner({
       .join(", ");
   };
 
-  const {setIsShowing} = useContext(ModalContext);
+  const { setIsShowing, setContent } = useContext(ModalContext);
 
   return (
     <div className="relative mt-14 overflow-hidden bg-slate-950 text-white shadow-sm shadow-slate-800 lg:mt-20">
@@ -73,7 +73,15 @@ export default function Banner({
             </div>
             <button
               className="flex items-center gap-1"
-              onClick={() => setIsShowing(true)}
+              onClick={() => {
+                setIsShowing(true);
+                setContent(
+                  <iframe
+                    className="aspect-video w-1/2 min-w-[450px]"
+                    src={`https://www.youtube.com/embed/${trailerVideoKey}`}
+                  ></iframe>,
+                );
+              }}
             >
               <FontAwesomeIcon icon={faPlay}></FontAwesomeIcon>
               Trailer

@@ -8,7 +8,7 @@ export default function MovieDetails() {
   const { id } = useParams();
 
   const { data: movieInfo, isLoading } = useFetch({
-    url: `movie/${id}?append_to_response=release_dates,credits`,
+    url: `movie/${id}?append_to_response=release_dates,credits,videos`,
   });
 
   const certification =
@@ -32,6 +32,9 @@ export default function MovieDetails() {
         overview={movieInfo?.overview}
         certification={certification}
         crew={movieInfo.credits?.crew}
+        trailerVideoKey={(movieInfo.videos?.results || []).find(
+          (video) => video.type === "Trailer",
+        )?.key}
       ></Banner>
       <ActorList
         movieInfo={movieInfo}

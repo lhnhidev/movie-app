@@ -8,7 +8,7 @@ export default function TvShowDetails() {
   const { id } = useParams();
 
   const { data: tvShowInfo, isLoading } = useFetch({
-    url: `tv/${id}?append_to_response=content_ratings,aggregate_credits`,
+    url: `tv/${id}?append_to_response=content_ratings,aggregate_credits,videos`,
   });
 
   const certification =
@@ -48,6 +48,11 @@ export default function TvShowDetails() {
         overview={tvShowInfo?.overview}
         certification={certification}
         crew={crew}
+        trailerVideoKey={
+          (tvShowInfo.videos?.results || []).find(
+            (video) => video.type === "Trailer",
+          )?.key
+        }
       ></Banner>
       <ActorList
         movieInfo={tvShowInfo}
