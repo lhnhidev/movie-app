@@ -1,8 +1,11 @@
 import ImageComponent from "@components/ImageComponent";
+import useModalContext from "@context/useModalContext";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function Movie({ movie }) {
+export default function Movie({ movie, trailerVideoKey }) {
+  const { setIsShowing, setContent } = useModalContext();
+
   return (
     <>
       <ImageComponent
@@ -29,7 +32,18 @@ export default function Movie({ movie }) {
           </div>
         </div>
         <div className="flex gap-1 text-[12px] min-[480px]:text-[14px] md:gap-2">
-          <button className="rounded bg-gray-200 px-2 py-1 text-black md:px-5 md:py-3">
+          <button
+            className="rounded bg-gray-200 px-2 py-1 text-black md:px-5 md:py-3"
+            onClick={() => {
+              setIsShowing(true);
+              setContent(
+                <iframe
+                  className="aspect-video w-1/2 min-w-[450px]"
+                  src={`https://www.youtube.com/embed/${trailerVideoKey}`}
+                ></iframe>,
+              );
+            }}
+          >
             <FontAwesomeIcon icon={faPlay} className="mr-1"></FontAwesomeIcon>
             Trailer
           </button>

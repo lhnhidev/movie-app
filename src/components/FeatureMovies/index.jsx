@@ -8,8 +8,13 @@ export default function FeatureMovies() {
 
   const { data } = useFetch({ url: "movie/popular" });
 
+  const { data: video } = useFetch(
+    { url: `movie/${activeMovieId}/videos` },
+    { enable: !!activeMovieId },
+  );
+
   const moviesPopular = useMemo(
-    () => data?.results?.slice(16, 20) || [],
+    () => data?.results?.slice(0, 4) || [],
     [data],
   );
 
@@ -34,7 +39,15 @@ export default function FeatureMovies() {
         .map((movie) => {
           return (
             <div key={movie.id}>
-              <Movie movie={movie}></Movie>
+              <Movie
+                movie={movie}
+                trailerVideoKey={
+                  (video?.results || []).find(
+                    (item) =>
+                      item.type === "Trailer" && item.site === "YouTube",
+                  )?.key
+                }
+              ></Movie>
               <PaginateIndicator
                 movies={moviesPopular}
                 activeMovieId={activeMovieId}

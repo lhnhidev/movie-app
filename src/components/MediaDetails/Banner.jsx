@@ -2,8 +2,7 @@ import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ImageComponent from "@components/ImageComponent.jsx";
 import CircularProgressBar from "@components/CircularProgressBar";
-import { useContext } from "react";
-import { ModalContext } from "@context/ModalContext";
+import useModalContext from "@context/useModalContext";
 
 export default function Banner({
   backdrop_path,
@@ -24,7 +23,7 @@ export default function Banner({
       .join(", ");
   };
 
-  const { setIsShowing, setContent } = useContext(ModalContext);
+  const { setIsShowing, setContent } = useModalContext();
 
   return (
     <div className="relative mt-14 overflow-hidden bg-slate-950 text-white shadow-sm shadow-slate-800 lg:mt-20">
