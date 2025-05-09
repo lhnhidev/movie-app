@@ -23,7 +23,7 @@ export default function Banner({
       .join(", ");
   };
 
-  const { setIsShowing, setContent } = useModalContext();
+  const { openPopup } = useModalContext();
 
   return (
     <div className="relative mt-14 overflow-hidden bg-slate-950 text-white shadow-sm shadow-slate-800 lg:mt-20">
@@ -73,8 +73,7 @@ export default function Banner({
             <button
               className="flex items-center gap-1"
               onClick={() => {
-                setIsShowing(true);
-                setContent(
+                openPopup(
                   <iframe
                     className="aspect-video w-1/2 min-w-[450px]"
                     src={`https://www.youtube.com/embed/${trailerVideoKey}`}

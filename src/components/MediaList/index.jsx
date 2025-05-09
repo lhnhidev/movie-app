@@ -2,8 +2,10 @@ import MovieCard from "@components/MovieCard";
 import useFetch from "@hooks/useFetch";
 import { useMemo, useState } from "react";
 
-export default function MediaList({ title, tabs }) {
-  const [activeTabId, setActiveTabId] = useState(tabs[0].id);
+export default function MediaList({ title, tabs, type }) {
+  const [activeTabId, setActiveTabId] = useState(
+    sessionStorage.getItem(`tab_${type}_id`) ?? tabs[0].id,
+  );
 
   const url = useMemo(
     () => tabs.find((tab) => tab.id === activeTabId)?.url,
@@ -25,6 +27,7 @@ export default function MediaList({ title, tabs }) {
                 key={tab.id}
                 className={`cursor-pointer rounded px-1 py-1 min-[480px]:px-2 ${tab.id == activeTabId ? "bg-white text-black" : ""}`}
                 onClick={() => {
+                  sessionStorage.setItem(`tab_${type}_id`, tab.id);
                   setActiveTabId(tab.id);
                 }}
               >

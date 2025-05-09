@@ -13,8 +13,13 @@ export default function ModalProvider({ children }) {
     }
   }, [isShowing]);
 
+  const openPopup = (newContent) => {
+    setIsShowing(true);
+    setContent(newContent);
+  }
+
   return (
-    <ModalContext.Provider value={{ isShowing, setIsShowing, setContent }}>
+    <ModalContext.Provider value={{ openPopup }}>
       {children}
       {isShowing && (
         <div

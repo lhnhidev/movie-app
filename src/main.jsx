@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./pages/RootLayout.jsx";
 import TvShowDetails from "./pages/TvShowDetails";
 import ModalProvider from "@context/ModalProvider";
+import PeoplePage from "./pages/PeoplePage";
 
 const router = createBrowserRouter([
   {
@@ -22,8 +23,26 @@ const router = createBrowserRouter([
       },
       {
         path: "/tv/:id",
-        element: <TvShowDetails></TvShowDetails>
-      }
+        element: <TvShowDetails></TvShowDetails>,
+      },
+      {
+        path: "/people/:id",
+        element: <PeoplePage></PeoplePage>,
+        loader: async function ({ params }) {
+          // console.log(params);
+          const data = await fetch(
+            `${import.meta.env.VITE_HOST}person/${params.id}`,
+            {
+              method: "GET",
+              headers: {
+                accept: "application/json",
+                Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
+              },
+            },
+          );
+          return data;
+        },
+      },
     ],
   },
   {

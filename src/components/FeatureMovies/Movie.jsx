@@ -2,9 +2,10 @@ import ImageComponent from "@components/ImageComponent";
 import useModalContext from "@context/useModalContext";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 
 export default function Movie({ movie, trailerVideoKey }) {
-  const { setIsShowing, setContent } = useModalContext();
+  const { openPopup } = useModalContext();
 
   return (
     <>
@@ -35,8 +36,7 @@ export default function Movie({ movie, trailerVideoKey }) {
           <button
             className="rounded bg-gray-200 px-2 py-1 text-black md:px-5 md:py-3"
             onClick={() => {
-              setIsShowing(true);
-              setContent(
+              openPopup(
                 <iframe
                   className="aspect-video w-1/2 min-w-[450px]"
                   src={`https://www.youtube.com/embed/${trailerVideoKey}`}
@@ -47,9 +47,11 @@ export default function Movie({ movie, trailerVideoKey }) {
             <FontAwesomeIcon icon={faPlay} className="mr-1"></FontAwesomeIcon>
             Trailer
           </button>
-          <button className="rounded border border-gray-200 px-2 py-1 md:px-5 md:py-3">
-            Thông tin
-          </button>
+          <Link to={`/movie/${movie.id}`}>
+            <button className="rounded border border-gray-200 px-2 py-1 md:px-5 md:py-3">
+              Details
+            </button>
+          </Link>
         </div>
       </div>
     </>

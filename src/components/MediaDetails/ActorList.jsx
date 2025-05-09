@@ -12,7 +12,7 @@ export default function ActorList({ movieInfo, actors, id, type }) {
 
   return (
     <div className="bg-slate-950 px-8 py-5 text-white">
-      <div className="mx-auto flex max-w-5xl gap-6">
+      <div className="container">
         <div className="flex-[2]">
           <p className="mb-3 text-[18px] font-bold">Actor</p>
           <div className="grid grid-cols-3 gap-3 sm:grid-cols-4">
@@ -41,7 +41,7 @@ export default function ActorList({ movieInfo, actors, id, type }) {
           
 
           <div className="mt-6">
-            <RelatedMediaList id={id} type={type}></RelatedMediaList>
+            <RelatedMediaList id={id} type={type} title="More like this"></RelatedMediaList>
           </div>
         </div>
         <div className="flex-1">
