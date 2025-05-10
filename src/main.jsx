@@ -1,13 +1,15 @@
-import { StrictMode } from "react";
+import React, { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import HomePage from "./pages/HomePage.jsx";
-import MovieDetails from "./pages/MovieDetails.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import RootLayout from "./pages/RootLayout.jsx";
-import TvShowDetails from "./pages/TvShowDetails";
+import RootLayout from "@pages/RootLayout.jsx";
 import ModalProvider from "@context/ModalProvider";
-import PeoplePage from "./pages/PeoplePage";
+
+const HomePage = React.lazy(() => import('@pages/HomePage.jsx'));
+const MovieDetails = React.lazy(() => import('@pages/MovieDetails.jsx'));
+const TvShowDetails = React.lazy(() => import('@pages/TvShowDetails.jsx'));
+const PeoplePage = React.lazy(() => import('@pages/PeoplePage.jsx'));
+const SearchPage = React.lazy(() => import('@pages/SearchPage'));
 
 const router = createBrowserRouter([
   {
@@ -29,7 +31,6 @@ const router = createBrowserRouter([
         path: "/people/:id",
         element: <PeoplePage></PeoplePage>,
         loader: async function ({ params }) {
-          // console.log(params);
           const data = await fetch(
             `${import.meta.env.VITE_HOST}person/${params.id}`,
             {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
           );
           return data;
         },
+      },
+      {
+        path: "/search",
+        element: <SearchPage></SearchPage>,
       },
     ],
   },

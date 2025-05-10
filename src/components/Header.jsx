@@ -14,7 +14,9 @@ export default function Header() {
       </div>
 
       <div className="cursor-pointer">
-        <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
+        <Link to="/search">
+          <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
+        </Link>
       </div>
     </header>
   );
