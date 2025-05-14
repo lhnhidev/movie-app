@@ -1,4 +1,5 @@
 import FormField from "@components/FormField";
+import GenresInput from "@components/FormField/GenresInput";
 import MediaInput from "@components/FormField/MediaInput";
 import { useForm } from "react-hook-form";
 
@@ -13,12 +14,19 @@ export default function SearchPage() {
         <p className="mb-3 text-2xl font-bold">Search</p>
         <div className="flex">
           <div className="flex-1">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
               <FormField
                 label="Media Type"
                 Component={MediaInput}
                 name="mediaType"
                 control={control}
+              ></FormField>
+
+              <FormField
+                label="Genres"
+                name="genres"
+                control={control}
+                Component={GenresInput}
               ></FormField>
 
               <input value="Submit" type="submit"></input>
