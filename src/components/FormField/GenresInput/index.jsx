@@ -13,15 +13,13 @@ export default function GenresInput({ control, value = [], onChange }) {
     onChange([]);
   }, [mediaType, onChange]);
 
-  console.log(value);
-
   return (
     <div className="flex flex-wrap gap-1 text-[14px]">
       {(data?.genres || []).map((genre) => {
         return (
           <p
             key={genre.id}
-            className={`cursor-pointer rounded px-2 ${value.includes(genre.id) ? "bg-[#E50914] text-white" : "border-gray-500 bg-gray-300 text-black"}`}
+            className={`cursor-pointer rounded px-2 py-1 ${value.includes(genre.id) ? "bg-[#E50914] text-white" : "border-gray-500 bg-gray-300 text-black"}`}
             onClick={() => {
               let newValue = [...value];
               if (value.includes(genre.id)) {

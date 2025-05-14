@@ -1,4 +1,4 @@
-export default function MediaInput(field) {
+export default function MediaInput({ name, value, onChange }) {
   return (
     <div>
       <div className="flex items-center">
@@ -7,9 +7,9 @@ export default function MediaInput(field) {
           className="mr-1"
           type="radio"
           value="movie"
-          name={field.name}
-          checked={field.value === "movie"}
-          onChange={field.onChange}
+          name={name}
+          checked={value === "movie"}
+          onChange={onChange}
         ></input>
         <label htmlFor="movie">Movie</label>
         <br />
@@ -20,9 +20,9 @@ export default function MediaInput(field) {
           className="mr-1"
           type="radio"
           value="tv"
-          name={field.name}
-          checked={field.value === "tv"}
-          onChange={field.onChange}
+          name={name}
+          checked={value === "tv"}
+          onChange={onChange}
         ></input>
         <label htmlFor="tv">Tv Show</label>
         <br />

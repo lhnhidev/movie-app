@@ -3,12 +3,14 @@ import useFetch from "@hooks/useFetch";
 import { useMemo } from "react";
 
 export default function RelatedMediaList({ type, id, title }) {
+  // type in [tv, movie, actor]
   const { data } = useFetch({
     url:
       type === "actor"
         ? `person/${id}/combined_credits`
         : `${type}/${id}/recommendations`,
   });
+  console.log(type, id, title);
   const relatedMediaList = useMemo(() => {
     if (type === "actor") return data?.cast || [];
     return data?.results || [];
@@ -21,7 +23,6 @@ export default function RelatedMediaList({ type, id, title }) {
         {relatedMediaList.map((media) => {
           return (
             <MovieCard
-              // key={media?.id}
               key={crypto.randomUUID()}
               id={media?.id}
               poster={media?.poster_path}
