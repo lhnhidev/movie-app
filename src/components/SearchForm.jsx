@@ -17,8 +17,6 @@ export default function SearchForm({ searchFormValues, setSearchFormValues }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(watch())]);
 
-  console.log(searchFormValues);
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
       <FormField
@@ -42,7 +40,7 @@ export default function SearchForm({ searchFormValues, setSearchFormValues }) {
         Component={RatingInput}
       ></FormField>
 
-      <input value="Submit" type="submit"></input>
+      {/* <input value="Submit" type="submit"></input> */}
     </form>
   );
 }

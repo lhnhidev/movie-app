@@ -10,13 +10,16 @@ export default function SearchPage() {
     rating: "All",
   });
 
-  const {mediaType, genres, rating} = searchFormValues;
+  const { mediaType, genres, rating } = searchFormValues;
+  const gte = rating.slice(0, rating.indexOf("-")) / 10;
+  const lte = rating.slice(rating.indexOf("-") + 1, rating.length) / 10;
 
-  const { data } = useFetch({ url: `discover/${mediaType}?with_genres=${genres.join(",")}` });
-  console.log(data);
+  const { data } = useFetch({
+    url: `discover/${mediaType}?with_genres=${genres.join(",")}${rating === "All" ? "" : `&vote_average.gte=${gte}&vote_average.lte=${lte}`}`,
+  });
 
   return (
-    <div className="mt-14 bg-slate-950 p-8 text-white lg:mt-20">
+    <div className="mt-14 bg-slate-950 p-8 text-white lg:mt-20 lg:min-h-[calc(100vh-80px)] min-h-[calc(100vh-56px)]">
       <div className="container flex-col">
         <p className="mb-3 text-2xl font-bold">Search</p>
         <div className="flex gap-6">
