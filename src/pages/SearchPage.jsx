@@ -36,7 +36,7 @@ export default function SearchPage() {
         <div className="flex gap-6">
           <div className="flex-1">
             <SearchForm
-              key={JSON.stringify(searchFormValues)}
+              key={searchFormValues.mediaType}
               searchFormValues={searchFormValues}
               setSearchFormValues={setSearchFormValues}
             ></SearchForm>
