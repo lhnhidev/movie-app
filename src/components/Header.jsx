@@ -9,8 +9,8 @@ export default function Header() {
         <Link to="/">
           <img src="/netflix.png" alt="logo-netflix" className="w-16 sm:w-28" />
         </Link>
-        <a href="#">Phim</a>
-        <a href="#">Truyền hình</a>
+        <Link to="/search?media-type=movie">Movie</Link>
+        <Link to="/search?media-type=tv">Tv Show</Link>
       </div>
 
       <div className="cursor-pointer">

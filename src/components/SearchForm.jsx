@@ -6,11 +6,9 @@ import RatingInput from "./FormField/RatingInput";
 import { useEffect } from "react";
 
 export default function SearchForm({ searchFormValues, setSearchFormValues }) {
-  const { control, handleSubmit, watch } = useForm({
+  const { control, watch } = useForm({
     defaultValues: searchFormValues,
   });
-
-  const onSubmit = (data) => console.log(data);
 
   useEffect(() => {
     setSearchFormValues(watch());
@@ -18,7 +16,7 @@ export default function SearchForm({ searchFormValues, setSearchFormValues }) {
   }, [JSON.stringify(watch())]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+    <form className="space-y-3">
       <FormField
         label="Media Type"
         name="mediaType"
