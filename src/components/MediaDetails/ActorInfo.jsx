@@ -24,7 +24,7 @@ export default function ActorInfo({
           <p className="mb-1 text-[18px] font-bold">{name}</p>
           <p className="text-basic mb-1 text-[14px]">{character}</p>
           <p className="text-basic text-[14px]">
-            {episode && (episode + ` Episode${episode > 1 ? "s" : ""}`)}
+            {episode && episode + ` Episode${episode > 1 ? "s" : ""}`}
           </p>
         </div>
       </div>

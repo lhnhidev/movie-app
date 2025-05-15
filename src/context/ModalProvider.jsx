@@ -16,7 +16,7 @@ export default function ModalProvider({ children }) {
   const openPopup = (newContent) => {
     setIsShowing(true);
     setContent(newContent);
-  }
+  };
 
   return (
     <ModalContext.Provider value={{ openPopup }}>

@@ -5,11 +5,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "@pages/RootLayout.jsx";
 import ModalProvider from "@context/ModalProvider";
 
-const HomePage = React.lazy(() => import('@pages/HomePage.jsx'));
-const MovieDetails = React.lazy(() => import('@pages/MovieDetails.jsx'));
-const TvShowDetails = React.lazy(() => import('@pages/TvShowDetails.jsx'));
-const PeoplePage = React.lazy(() => import('@pages/PeoplePage.jsx'));
-const SearchPage = React.lazy(() => import('@pages/SearchPage'));
+const HomePage = React.lazy(() => import("@pages/HomePage.jsx"));
+const MovieDetails = React.lazy(() => import("@pages/MovieDetails.jsx"));
+const TvShowDetails = React.lazy(() => import("@pages/TvShowDetails.jsx"));
+const PeoplePage = React.lazy(() => import("@pages/PeoplePage.jsx"));
+const SearchPage = React.lazy(() => import("@pages/SearchPage"));
 
 const router = createBrowserRouter([
   {

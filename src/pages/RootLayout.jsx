@@ -11,5 +11,5 @@ export default function RootLayout() {
         <Outlet></Outlet>
       </Suspense>
     </div>
-  )
+  );
 }

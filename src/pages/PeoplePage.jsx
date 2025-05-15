@@ -43,7 +43,9 @@ export default function PeoplePage() {
           <p className="text-2xl font-bold">{person?.name}</p>
           <div>
             <p className="mb-1 text-lg font-bold">Biography</p>
-            <p className="text-justify whitespace-pre-line">{person?.biography}</p>
+            <p className="whitespace-pre-line text-justify">
+              {person?.biography}
+            </p>
           </div>
           <RelatedMediaList
             type="actor"
@@ -51,7 +53,6 @@ export default function PeoplePage() {
             id={person?.id}
           ></RelatedMediaList>
         </div>
-
       </div>
     </div>
   );

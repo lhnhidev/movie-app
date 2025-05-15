@@ -11,7 +11,10 @@ export default function MovieCard({
   mediaType,
 }) {
   return (
-    <Link to={mediaType === "tv" ? `/tv/${id}` : `/movie/${id}`} className="rounded-lg border border-slate-800">
+    <Link
+      to={mediaType === "tv" ? `/tv/${id}` : `/movie/${id}`}
+      className="rounded-lg border border-slate-800"
+    >
       <div className="relative">
         {mediaType === "tv" && (
           <p className="absolute right-2 top-2 rounded bg-slate-800/80 p-1 text-lg text-white shadow-sm">
@@ -21,7 +24,7 @@ export default function MovieCard({
         <ImageComponent
           src={`https://image.tmdb.org/t/p/original${poster}`}
           alt={`poster_${title}`}
-          className="rounded-t-lg w-full"
+          className="w-full rounded-t-lg"
         ></ImageComponent>
         <div className="relative top-[-20px] px-3 min-[768px]:px-6">
           <div className="mb-4">

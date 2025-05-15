@@ -32,9 +32,11 @@ export default function MovieDetails() {
         overview={movieInfo?.overview}
         certification={certification}
         crew={movieInfo.credits?.crew}
-        trailerVideoKey={(movieInfo.videos?.results || []).find(
-          (video) => video.type === "Trailer",
-        )?.key}
+        trailerVideoKey={
+          (movieInfo.videos?.results || []).find(
+            (video) => video.type === "Trailer",
+          )?.key
+        }
       ></Banner>
       <ActorList
         movieInfo={movieInfo}

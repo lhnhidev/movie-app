@@ -13,10 +13,7 @@ export default function FeatureMovies() {
     { enable: !!activeMovieId },
   );
 
-  const moviesPopular = useMemo(
-    () => data?.results?.slice(0, 4) || [],
-    [data],
-  );
+  const moviesPopular = useMemo(() => data?.results?.slice(0, 4) || [], [data]);
 
   useEffect(() => {
     setActiveMovieId(moviesPopular[0]?.id);
